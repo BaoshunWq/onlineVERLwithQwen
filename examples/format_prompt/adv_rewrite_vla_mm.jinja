@@ -1,0 +1,24 @@
+{# 先取字段 #}
+{% set p = content.get("prompt", {}) %}
+{% set imgs = content.get("image", []) %}
+{% set i0 = p.get("original_instruction", "") %}
+
+<|im_start|>system
+You are a quality assurance engineer for a robot. Your goal is to propose rewrites
+that keep the meaning of the instruction but are likely to reduce a VLA's success.<|im_end|>
+<|im_start|>user
+{# 为每张图插一次占位符；避免多余空白，用 -% 和 %-
+   保证占位符与后面的文本紧挨着 #}
+{% for _ in imgs -%}<|vision_start|><|image_pad|><|vision_end|>{%- endfor %}
+
+
+Rewrite the INSTRUCTION so its meaning is preserved, but wording/formatting choices
+increase difficulty for a VLA on the same task.
+
+Constraints:
+- Do NOT change the task requirement.
+- Keep it concise (<= 60 tokens).
+- Output ONLY the rewritten instruction.
+
+INSTRUCTION:
+"{{ i0 }}"<|im_end|>

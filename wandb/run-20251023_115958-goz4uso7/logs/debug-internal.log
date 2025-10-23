@@ -1,0 +1,12 @@
+{"time":"2025-10-23T11:59:58.757971689+08:00","level":"INFO","msg":"stream: starting","core version":"0.22.2"}
+{"time":"2025-10-23T11:59:59.227613715+08:00","level":"INFO","msg":"stream: created new stream","id":"goz4uso7"}
+{"time":"2025-10-23T11:59:59.227747975+08:00","level":"INFO","msg":"handler: started","stream_id":"goz4uso7"}
+{"time":"2025-10-23T11:59:59.227912022+08:00","level":"INFO","msg":"stream: started","id":"goz4uso7"}
+{"time":"2025-10-23T11:59:59.227955563+08:00","level":"INFO","msg":"writer: started","stream_id":"goz4uso7"}
+{"time":"2025-10-23T11:59:59.227998551+08:00","level":"INFO","msg":"sender: started","stream_id":"goz4uso7"}
+{"time":"2025-10-23T12:00:11.513970929+08:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"updating run metadata","runtime_seconds":0.001924277}],"total_operations":1}}
+{"time":"2025-10-23T12:00:12.317615552+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-10-23T12:00:12.567996889+08:00","level":"INFO","msg":"stream: closing","id":"goz4uso7"}
+{"time":"2025-10-23T12:00:12.56802495+08:00","level":"INFO","msg":"handler: closed","stream_id":"goz4uso7"}
+{"time":"2025-10-23T12:00:12.568154335+08:00","level":"INFO","msg":"sender: closed","stream_id":"goz4uso7"}
+{"time":"2025-10-23T12:00:12.568169967+08:00","level":"INFO","msg":"stream: closed","id":"goz4uso7"}

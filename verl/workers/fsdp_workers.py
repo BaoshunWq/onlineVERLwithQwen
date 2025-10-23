@@ -564,6 +564,7 @@ class FSDPWorker(Worker):
         prompts.meta_info.update(meta_info)
 
         prompts = self.rollout_sharding_manager.preprocess_data(prompts)
+        print("prompts after preprocess:", prompts)
         output = self.rollout.generate_sequences(prompts=prompts)
         output = self.rollout_sharding_manager.postprocess_data(output)
 

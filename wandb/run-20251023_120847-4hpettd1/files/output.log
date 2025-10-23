@@ -1,0 +1,43 @@
+wandb: Detected [openai] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+{"__magic_token__": "__ray_tqdm_magic_token__", "x": 0, "pos": 0, "desc": "Running step", "total": 30, "unit": "it", "ip": "143.89.46.42", "pid": 2799770, "uuid": "cfe2849726d144c880a51cc93ff17c6f", "closed": false}
+Start validation...
+Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): [36mray::WorkerDict.actor_rollout_ref_generate_sequences()[39m (pid=2806601, ip=143.89.46.42, actor_id=a200b5988098e3cfd2ac392f01000000, repr=<verl.single_controller.ray.base.WorkerDict object at 0x7fd2a0fee020>)
+  File "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/verl/single_controller/ray/base.py", line 432, in func
+    return getattr(self.worker_dict[key], name)(*args, **kwargs)
+  File "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/verl/single_controller/base/decorator.py", line 207, in inner
+    return func(*args, **kwargs)
+  File "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/verl/workers/fsdp_workers.py", line 568, in generate_sequences
+    output = self.rollout.generate_sequences(prompts=prompts)
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/verl/workers/rollout/vllm_rollout_spmd.py", line 192, in generate_sequences
+    completions: list[RequestOutput] = self.inference_engine.generate(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 393, in generate
+    self._validate_and_add_requests(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 1516, in _validate_and_add_requests
+    self._add_request(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 1569, in _add_request
+    self.llm_engine.add_request(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 230, in add_request
+    prompt_str, request = self.processor.process_inputs(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/v1/engine/processor.py", line 377, in process_inputs
+    processed_inputs: ProcessorInputs = self.input_preprocessor.preprocess(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/inputs/preprocess.py", line 644, in preprocess
+    return self._process_decoder_only_prompt(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/inputs/preprocess.py", line 614, in _process_decoder_only_prompt
+    prompt_comps = self._prompt_to_llm_inputs(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/inputs/preprocess.py", line 388, in _prompt_to_llm_inputs
+    return self._process_tokens(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/inputs/preprocess.py", line 317, in _process_tokens
+    inputs = self._process_multimodal(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/inputs/preprocess.py", line 242, in _process_multimodal
+    mm_input = mm_processor.apply(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/multimodal/processing.py", line 2045, in apply
+    prompt_ids, prompt, mm_placeholders = self._maybe_apply_prompt_updates(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/multimodal/processing.py", line 1997, in _maybe_apply_prompt_updates
+    ) = self._apply_prompt_updates(
+  File "/home/baoshuntong/anaconda3/envs/easyR1/lib/python3.10/site-packages/vllm/multimodal/processing.py", line 1919, in _apply_prompt_updates
+    assert update_idx is not None, (
+AssertionError: Failed to apply prompt replacement for mm_items['image'][0]

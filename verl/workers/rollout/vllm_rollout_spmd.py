@@ -49,26 +49,55 @@ def _get_logit_bias(processor: Optional[ProcessorMixin]) -> Optional[dict[int, f
         return None
 
 
+# def _process_multi_modal_data(
+#     multi_modal_data: dict[str, Any], min_pixels: int, max_pixels: int, video_fps: float
+# ) -> dict[str, Any]:
+#     # may convert image path to image object
+#     images, videos = [], []
+#     if "images" in multi_modal_data:
+#         for image in multi_modal_data["images"]:
+#             images.append(process_image(image, min_pixels, max_pixels))
+
+#     if "videos" in multi_modal_data:
+#         for video in multi_modal_data["videos"]:
+#             videos.append(process_video(video, min_pixels, max_pixels, video_fps))
+
+#     if len(images) != 0:
+#         return {"image": images}
+
+#     if len(videos) != 0:
+#         return {"video": videos}
+
+#     return None
 def _process_multi_modal_data(
     multi_modal_data: dict[str, Any], min_pixels: int, max_pixels: int, video_fps: float
-) -> dict[str, Any]:
-    # may convert image path to image object
+) -> Optional[dict[str, Any]]:
+    """
+    统一把各种写法（image/images, video/videos）规范成 vLLM 期望的:
+      {"image": [processed_images]} 或 {"video": [processed_videos]}
+    """
     images, videos = [], []
-    if "images" in multi_modal_data:
-        for image in multi_modal_data["images"]:
-            images.append(process_image(image, min_pixels, max_pixels))
 
-    if "videos" in multi_modal_data:
-        for video in multi_modal_data["videos"]:
-            videos.append(process_video(video, min_pixels, max_pixels, video_fps))
+    # --- 统一取图像列表 ---
+    img_list = (multi_modal_data.get("image")
+                or multi_modal_data.get("images")
+                or [])
+    for img in img_list:
+        images.append(process_image(img, min_pixels, max_pixels))
 
-    if len(images) != 0:
+    # --- 统一取视频列表 ---
+    vid_list = (multi_modal_data.get("video")
+                or multi_modal_data.get("videos")
+                or [])
+    for vid in vid_list:
+        videos.append(process_video(vid, min_pixels, max_pixels, video_fps))
+
+    if images:
         return {"image": images}
-
-    if len(videos) != 0:
+    if videos:
         return {"video": videos}
+    return None  # 没有多模态就返回 None
 
-    return None
 
 
 class vLLMRollout(BaseRollout):
