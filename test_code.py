@@ -33,8 +33,12 @@
 # print("special_tokens_map:", tok.special_tokens_map)
 # print("additional_special_tokens:", tok.additional_special_tokens)
 
-from transformers import AutoProcessor
-MODEL = "Qwen/Qwen2-VL-2B-Instruct"  # 必须是 VL 版本
+from transformers import Qwen3VLForConditionalGeneration, AutoProcessor
+
+MODEL = "Qwen/Qwen3-VL-4B-Instruct"  # 必须是 VL 版本
+model = Qwen3VLForConditionalGeneration.from_pretrained(
+    MODEL, torch_dtype="auto", device_map="auto"
+)
 proc = AutoProcessor.from_pretrained(MODEL, trust_remote_code=True)
 
 msgs = [

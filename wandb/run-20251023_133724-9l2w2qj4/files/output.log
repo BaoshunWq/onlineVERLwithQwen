@@ -1,5 +1,0 @@
-wandb: Detected [openai] in use.
-wandb: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
-wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
-{"__magic_token__": "__ray_tqdm_magic_token__", "x": 0, "pos": 0, "desc": "Running step", "total": 30, "unit": "it", "ip": "143.89.46.42", "pid": 2855512, "uuid": "d3d697d3b1c24dbb861dd75595b07f5a", "closed": false}
-Start validation...
