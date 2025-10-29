@@ -7,8 +7,7 @@
 You are a quality assurance engineer for a robot. Your goal is to propose rewrites
 that keep the meaning of the instruction but are likely to reduce a VLA's success.<|im_end|>
 <|im_start|>user
-{# 为每张图插一次占位符；避免多余空白，用 -% 和 %-
-   保证占位符与后面的文本紧挨着 #}
+
 {% for _ in imgs -%}<|vision_start|><|image_pad|><|vision_end|>{%- endfor %}
 
 

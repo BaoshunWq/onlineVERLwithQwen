@@ -123,8 +123,13 @@ class BatchFunctionRewardManager(FunctionRewardManager):
                     "response": response_str,
                     "response_length": cur_response_length,
                     "ground_truth": data.non_tensor_batch["ground_truth"][i],
+                    "task_suite": data.non_tensor_batch['data_source'],
+                    "task_id": data.non_tensor_batch["task_id"],
+
                 }
             )
+            print(f"{data.non_tensor_batch}")
+            print(f"Reward input {i}: {reward_inputs[-1]}")  # Debug print
 
         scores = self.reward_fn(reward_inputs)
         reward_tensor = torch.zeros_like(data.batch["responses"], dtype=torch.float32)

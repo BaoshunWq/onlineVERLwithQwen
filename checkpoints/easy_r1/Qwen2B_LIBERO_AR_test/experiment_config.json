@@ -1,19 +1,19 @@
 {
   "data": {
-    "train_files": "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/libero-init-frames/parquet_data_for_rl/train.parquet",
-    "val_files": "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/libero-init-frames/parquet_data_for_rl/test.parquet",
+    "train_files": "libero-init-frames/parquet_data_for_rl/train.parquet",
+    "val_files": "libero-init-frames/parquet_data_for_rl/test.parquet",
     "prompt_key": "prompt",
     "answer_key": "answer",
     "image_key": "image",
     "video_key": "videos",
     "image_dir": null,
     "video_fps": 2.0,
-    "max_prompt_length": 2048,
-    "max_response_length": 2048,
-    "rollout_batch_size": 4,
+    "max_prompt_length": 1024,
+    "max_response_length": 512,
+    "rollout_batch_size": 1,
     "mini_rollout_batch_size": null,
     "val_batch_size": 1,
-    "format_prompt": "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/examples/format_prompt/adv_rewrite_vla_mm.jinja",
+    "format_prompt": "/root/code/saftyVLA/onlineVERLwithQwen/examples/format_prompt/adv_rewrite_vla_mm.jinja",
     "override_chat_template": null,
     "shuffle": true,
     "seed": 1,
@@ -26,7 +26,7 @@
     "hybrid_engine": true,
     "actor": {
       "strategy": "fsdp",
-      "global_batch_size": 4,
+      "global_batch_size": 1,
       "micro_batch_size_per_device_for_update": 1,
       "micro_batch_size_per_device_for_experience": 1,
       "max_grad_norm": 1.0,
@@ -60,7 +60,7 @@
         "lr_warmup_steps": null,
         "min_lr_ratio": null,
         "warmup_style": "constant",
-        "training_steps": 30
+        "training_steps": 135
       },
       "fsdp": {
         "enable_full_shard": true,
@@ -115,7 +115,7 @@
         "lr_warmup_steps": null,
         "min_lr_ratio": null,
         "warmup_style": "constant",
-        "training_steps": 30
+        "training_steps": 135
       },
       "fsdp": {
         "enable_full_shard": true,
@@ -159,7 +159,7 @@
     },
     "reward": {
       "reward_type": "batch",
-      "reward_function": "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/examples/reward_function/reward_libero.py",
+      "reward_function": "/root/code/saftyVLA/onlineVERLwithQwen/examples/reward_function/reward_libero.py",
       "reward_function_kwargs": {},
       "skip_special_tokens": true,
       "num_cpus": 1,
@@ -167,7 +167,7 @@
     },
     "rollout": {
       "name": "vllm",
-      "n": 4,
+      "n": 2,
       "temperature": 1.0,
       "top_p": 1.0,
       "top_k": -1,
@@ -178,7 +178,7 @@
       "ignore_eos": false,
       "enforce_eager": false,
       "enable_chunked_prefill": false,
-      "tensor_parallel_size": 2,
+      "tensor_parallel_size": 1,
       "max_model_len": null,
       "max_num_batched_tokens": 8192,
       "disable_log_stats": true,
@@ -188,8 +188,8 @@
         "top_p": 0.95,
         "n": 1
       },
-      "prompt_length": 2048,
-      "response_length": 2048,
+      "prompt_length": 1024,
+      "response_length": 512,
       "trust_remote_code": false
     }
   },
@@ -219,7 +219,7 @@
       "wandb"
     ],
     "nnodes": 1,
-    "n_gpus_per_node": 4,
+    "n_gpus_per_node": 1,
     "max_try_make_batch": 20,
     "critic_warmup": 0,
     "val_freq": 5,
@@ -229,7 +229,7 @@
     "save_freq": 5,
     "save_limit": 3,
     "save_model_only": false,
-    "save_checkpoint_path": "/home/baoshuntong/code/saftyEmbodyAI/EasyR1/checkpoints/easy_r1/Qwen2B_LIBERO_AR_test",
+    "save_checkpoint_path": "/root/code/saftyVLA/onlineVERLwithQwen/checkpoints/easy_r1/Qwen2B_LIBERO_AR_test",
     "load_checkpoint_path": null,
     "ray_timeline": null,
     "find_last_checkpoint": true

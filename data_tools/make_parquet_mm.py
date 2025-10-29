@@ -65,17 +65,15 @@ def main():
 
         prompt_obj = {
             "original_instruction": original_instruction,
-            "suite": args.suite,
             # 注意：这里的 task_id 先用 enumerate 的 idx；如果你有精确的 LIBERO 映射，就替换为真实 ID
-            "task_id": idx,
             "seed": 0,
-            "init_state_id": 0,
         }
         if args.add_task_name:
             prompt_obj["task_name"] = task_language  # 备选：在 reward 里可用 name->id 解析
 
         rows.append({
-            "data_source": f"libero/{args.suite}",
+            "data_source": f"{args.suite}",
+            "task_id": idx,
             "prompt": prompt_obj,               # ✅ 换成我们训练要的结构
             "image": [image_path],  # ✅ 改名 image_key=images
             "answer": "",                       # ✅ 改名 answer_key=answer（占位）

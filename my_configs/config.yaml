@@ -3,13 +3,13 @@ data:
   val_files: hiyouga/math12k@test
   prompt_key: prompt
   answer_key: answer
-  image_key: image
+  image_key: images
   # video_key: videos
   image_dir: null
   # video_fps: 2.0
-  max_prompt_length: 2048
-  max_response_length: 2048
-  rollout_batch_size: 4  # changed from 1 so it's divisible by worker.actor.global_batch_size (4)
+  max_prompt_length: 1024
+  max_response_length: 512
+  rollout_batch_size: 1  # changed from 1 so it's divisible by worker.actor.global_batch_size (4)
   mini_rollout_batch_size: null  # equivalent to verl's data.gen_batch_size
   val_batch_size: 1
   format_prompt: ./examples/format_prompt/adv_rewrite_vla_mm.jinja
@@ -33,7 +33,7 @@ algorithm:
 
 worker:
   actor:
-    global_batch_size: 4  # increased from 1; with rollout.n=2 this yields 8 which matches 8 GPUs
+    global_batch_size: 1  # increased from 1; with rollout.n=2 this yields 8 which matches 8 GPUs
     micro_batch_size_per_device_for_update: 1  # equivalent to verl's actor.ppo_micro_batch_size_per_gpu
     micro_batch_size_per_device_for_experience: 1  # equivalent to verl's rollout.log_prob_micro_batch_size_per_gpu
     max_grad_norm: 1.0
@@ -59,14 +59,14 @@ worker:
       offload_optimizer: true  # true: more CPU memory; false: more GPU memory
 
   rollout:
-    n: 4
+    n: 2
     temperature: 1.0
     top_p: 1.0
     limit_images: 0
     gpu_memory_utilization: 0.6
     enforce_eager: false
     enable_chunked_prefill: false
-    tensor_parallel_size: 2
+    tensor_parallel_size: 1
     disable_tqdm: false
     val_override_config:
       temperature: 0.6
@@ -90,9 +90,9 @@ trainer:
   max_steps: null
   project_name: easy_r1
   experiment_name: qwen2_5_7b_math_grpo
-  logger: ["file", "wandb"]
+  logger: ["console"]
   nnodes: 1
-  n_gpus_per_node: 8
+  n_gpus_per_node: 1
   max_try_make_batch: 20  # -1 means no limit
   val_freq: 5  # -1 to disable
   val_before_train: true
